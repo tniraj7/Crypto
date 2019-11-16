@@ -10,7 +10,10 @@ struct ContentView: View {
                     .fontWeight(.heavy)
                     .font(.largeTitle)
                 
-
+                List {
+                    Text("Item 1")
+                    Text("Item 2")
+                }
             }
             
             .navigationBarTitle(Text("Dashboard"))
