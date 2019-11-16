@@ -14,6 +14,7 @@ struct ContentView: View {
             }
             
             .navigationBarTitle(Text("Dashboard"))
+            .navigationBarHidden(true)
         }
         
     }
