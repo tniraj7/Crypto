@@ -2,7 +2,20 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello")
+        
+        NavigationView {
+            VStack {
+                Text("Your crypto balance")
+                Text("3133.7$")
+                    .fontWeight(.heavy)
+                    .font(.largeTitle)
+                
+
+            }
+            
+            .navigationBarTitle(Text("Dashboard"))
+        }
+        
     }
 }
 
