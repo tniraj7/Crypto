@@ -27,8 +27,12 @@ struct ContentView: View {
                     Section(header: Text("Current Prices")) {
                         ForEach(rates) { coin in
                             HStack {
+                                Image(coin.icon)
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
                                 Text("\(coin.name) (\(coin.id))")
-                                Text(coin.price)
+                                Spacer()
+                                Text(coin.price).fontWeight(.bold)
                             }
                         }
                     }
