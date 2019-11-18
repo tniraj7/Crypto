@@ -52,10 +52,25 @@ struct ContentView: View {
         Coin(id: "ETH", name: "Ethereum", price: "78.70", icon: "ethereum")
     ]
     
+    @State var is360 = false
+    
     var body: some View {
         
         NavigationView {
+            
             VStack {
+                
+                Button(action: {
+                    self.is360.toggle()
+                }) {
+                    
+                    BadgeSymbol()
+                        .frame(width: 150, height: 150)
+                        .rotation3DEffect(.degrees(is360 ? 360 : 0), axis: (x: 0, y: 1, z: 1))
+                        .animation(.easeIn) 
+                }
+
+                
                 Text("Your crypto balance")
                 Text("$3133.7")
                     .fontWeight(.heavy)
@@ -67,7 +82,8 @@ struct ContentView: View {
                             HStack {
                                 Image(coin.icon)
                                     .resizable()
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: 30, height: 30, alignment: .leading)
+                                    
                                 Text("\(coin.name) (\(coin.id))")
                                 Spacer()
                                 Text(coin.price).fontWeight(.bold)
