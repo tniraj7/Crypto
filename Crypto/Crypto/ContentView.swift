@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Coin: Identifiable{
+struct Coin: Identifiable {
     let id, name, price, icon: String
 }
 
@@ -52,6 +52,12 @@ struct ContentView: View {
         Coin(id: "ETH", name: "Ethereum", price: "78.70", icon: "ethereum")
     ]
     
+    var myWallet: [Coin] = [
+    Coin(id: "BTC", name: "Bitcoin", price: "1000.0", icon: "bitcoin"),
+    Coin(id: "LTC", name: "Litecoin", price: "2000.0", icon: "litecoin"),
+    Coin(id: "TRX", name: "Tron", price: "133.7", icon: "tron"),
+    ]
+    
     @State var is360 = false
     
     var body: some View {
@@ -67,7 +73,7 @@ struct ContentView: View {
                     BadgeSymbol()
                         .frame(width: 150, height: 150)
                         .rotation3DEffect(.degrees(is360 ? 360 : 0), axis: (x: 0, y: 1, z: 1))
-                        .animation(.easeIn) 
+                        .animation(.easeIn)
                 }
 
                 
@@ -77,8 +83,9 @@ struct ContentView: View {
                     .font(.largeTitle)
                 
                 List {
-                    Section(header: Text("Current Prices")) {
-                        ForEach(rates) { coin in
+                    
+                    Section(header: Text("My Wallet")) {
+                        ForEach(myWallet) { coin in
                             HStack {
                                 Image(coin.icon)
                                     .resizable()
@@ -87,6 +94,24 @@ struct ContentView: View {
                                 Text("\(coin.name) (\(coin.id))")
                                 Spacer()
                                 Text(coin.price).fontWeight(.bold)
+                            }
+                        }
+                    }
+                    
+                    Section(header: Text("Current Prices")) {
+                        ForEach(rates) { coin in
+                            
+                            NavigationLink(destination: Text("hello")) {
+
+                                HStack {
+                                    Image(coin.icon)
+                                        .resizable()
+                                        .frame(width: 30, height: 30, alignment: .leading)
+                                    
+                                    Text("\(coin.name) (\(coin.id))")
+                                    Spacer()
+                                    Text(coin.price).fontWeight(.bold)
+                                }
                             }
                         }
                     }
