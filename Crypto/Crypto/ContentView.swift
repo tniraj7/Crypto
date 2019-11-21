@@ -76,6 +76,7 @@ struct ContentView: View {
                         .animation(.easeIn)
                 }
 
+                LineChartController()
                 
                 Text("Your crypto balance")
                 Text("$3133.7")
