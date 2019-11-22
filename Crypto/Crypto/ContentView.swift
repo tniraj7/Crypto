@@ -76,7 +76,7 @@ struct ContentView: View {
                         .animation(.easeIn)
                 }
 
-                LineChartController()
+                LineChartController(lineCoordinates: [3,2,6], inline: true)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 150)
                     .padding()
                 
