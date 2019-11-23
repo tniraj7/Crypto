@@ -115,7 +115,7 @@ struct ContentView: View {
                     Section(header: Text("Current Prices")) {
                         ForEach(rates) { coin in
                             
-                            NavigationLink(destination: Text("hello")) {
+                            NavigationLink(destination: GraphCoin(title: coin.name)) {
 
                                 HStack {
                                     Image(coin.icon)
