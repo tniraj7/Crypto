@@ -4,13 +4,17 @@ import SwiftUI
 struct GraphCoin: View {
     
     let title: String
+    let lineCoordinates: [CGFloat]
     
     var body: some  View {
         LineChartController(lineCoordinates: [5000,8000,7000,11000,5000,6000,10000], inline: false)
+        LineChartController(lineCoordinates: lineCoordinates, inline: false)
             .padding(.leading, 30)
         .navigationBarTitle(Text(title))
     }
 }
+
+
 struct Coin: Identifiable {
     let id, name, price, icon: String
 }
