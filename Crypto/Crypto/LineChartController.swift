@@ -17,6 +17,8 @@ struct LineChartController: UIViewRepresentable {
         if inline {
             lineChart.y.labels.visible = false
             lineChart.x.labels.values = ["Yesterday", "Today", "Tomorrow"]
+        } else {
+            lineChart.x.labels.values = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"]
         }
         return lineChart
         
