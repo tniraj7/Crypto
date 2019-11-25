@@ -6,10 +6,23 @@ struct LoginView: View {
     @State private var password: String = ""
     
     var body: some View {
-        Form {
-            TextField("username", text: $username)
-            SecureField("password", text: $password)
-        }
+        NavigationView {
+            Form {
+                
+                TextField("username", text: $username)
+                SecureField("password", text: $password)
+                Button(action: {
+                    
+                }) {
+                    Text("Login")
+                        .padding([.trailing, .leading], 20)
+                        .padding([.top, .bottom], 10)
+                        .background(Color.yellow)
+                        .cornerRadius(10)
+                }
+            }
+        }.navigationBarTitle(Text("Crypto"))
+
     }
 }
 
