@@ -2,8 +2,14 @@ import SwiftUI
 
 struct LoginView: View {
     
+    @State private var username: String = ""
+    @State private var password: String = ""
+    
     var body: some View {
-        Text("Hello")
+        Form {
+            TextField("username", text: $username)
+            SecureField("password", text: $password)
+        }
     }
 }
 
