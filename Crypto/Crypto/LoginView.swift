@@ -8,20 +8,32 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             Form {
-                
+
                 TextField("username", text: $username)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .multilineTextAlignment(.center)
+                
                 SecureField("password", text: $password)
-                Button(action: {
-                    
-                }) {
-                    Text("Login")
-                        .padding([.trailing, .leading], 20)
-                        .padding([.top, .bottom], 10)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .multilineTextAlignment(.center)
+                
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        
+                    }) {
+                        Text("Login")
+                        .fontWeight(.medium)
+                        .foregroundColor(Color.black)
+                        .padding([.trailing, .leading], 15)
+                        .padding([.top, .bottom], 8)
                         .background(Color.yellow)
-                        .cornerRadius(10)
+                        .cornerRadius(7)
+                    }
+                    Spacer()
                 }
-            }
-        }.navigationBarTitle(Text("Crypto"))
+            }.navigationBarTitle("Crypto", displayMode: .automatic)
+        }
 
     }
 }
