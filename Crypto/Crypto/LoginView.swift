@@ -32,6 +32,7 @@ class HttpAuth: ObservableObject {
             guard let data = data else { return }
             
         }
+    }
 }
 
 struct LoginView: View {
