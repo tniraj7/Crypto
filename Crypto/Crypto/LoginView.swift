@@ -38,7 +38,6 @@ class HttpAuth: ObservableObject {
                     self.authenticated = true
                 }
             }
-        }
         }.resume()
     }
 }
@@ -47,6 +46,8 @@ struct LoginView: View {
     
     @State private var username: String = ""
     @State private var password: String = ""
+    
+    @State private var manager = HttpAuth()
     
     var body: some View {
         NavigationView {
@@ -60,10 +61,14 @@ struct LoginView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .multilineTextAlignment(.center)
                 
+                if manager.authenticated {
+                    Text("You are logged in :D")
+                }
+                
                 HStack {
                     Spacer()
                     Button(action: {
-                        
+                        self.manager.checkDetails(username: self.username, password: self.password)
                     }) {
                         Text("Login")
                         .fontWeight(.medium)
