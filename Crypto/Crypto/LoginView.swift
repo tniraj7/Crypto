@@ -39,6 +39,7 @@ class HttpAuth: ObservableObject {
                 }
             }
         }
+        }.resume()
     }
 }
 
