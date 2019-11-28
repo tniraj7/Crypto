@@ -36,6 +36,7 @@ class HttpAuth: ObservableObject {
             
             if finalData.status == "ok" {
             if finalData?.status == "error" {
+            if finalData?.status == "ok" {
                 DispatchQueue.main.async {
                     self.authenticated = true
                 }
