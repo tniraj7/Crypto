@@ -17,7 +17,7 @@ class HttpAuth: ObservableObject {
     }
     
     func checkDetails(username: String, password : String) {
-        guard let url = URL(string: "") else { return }
+        guard let url = URL(string: "https://a3db1794.ngrok.io/login") else { return }
         
         let body = ["username": username, "password": password]
         
@@ -31,11 +31,8 @@ class HttpAuth: ObservableObject {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else { return }
             
-            let finalData = try! JSONDecoder().decode(ServerMessage.self, from: data)
             let finalData = try? JSONDecoder().decode(ServerMessage.self, from: data)
             
-            if finalData.status == "ok" {
-            if finalData?.status == "error" {
             if finalData?.status == "ok" {
                 DispatchQueue.main.async {
                     self.authenticated = true
@@ -45,12 +42,27 @@ class HttpAuth: ObservableObject {
     }
 }
 
+struct RootView: View {
+
+    @State private var manager = HttpAuth()
+    
+    var body: some View {
+        VStack {
+            if manager.authenticated {
+                ContentView()
+            } else {
+                LoginView(manager: $manager)
+            }
+        }
+    }
+}
+
 struct LoginView: View {
     
     @State private var username: String = ""
     @State private var password: String = ""
     
-    @State private var manager = HttpAuth()
+    @Binding var manager: HttpAuth
     
     var body: some View {
         NavigationView {
@@ -63,10 +75,6 @@ struct LoginView: View {
                 SecureField("password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .multilineTextAlignment(.center)
-                
-                if manager.authenticated {
-                    Text("You are logged in :D")
-                }
                 
                 HStack {
                     Spacer()
@@ -89,8 +97,3 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
-}
