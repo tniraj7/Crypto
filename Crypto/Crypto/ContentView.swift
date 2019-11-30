@@ -1,61 +1,39 @@
 import SwiftUI
 
-struct Coin: Identifiable {
-    let id, name, price, icon: String
+
+struct GraphCoin: View {
+    
+    let title: String
+    let lineCoordinates: [CGFloat]
+    
+    var body: some  View {
+        LineChartController(lineCoordinates: lineCoordinates, inline: false)
+            .padding(.leading, 30)
+        .navigationBarTitle(Text(title))
+    }
 }
 
-struct BadgeSymbol: View {
-    
-    static let symbolColor = Color(red: 79.0/255, green: 79.0/255, blue: 191.0/255)
-    
-    var body : some View {
-        GeometryReader { geometry in
-            Path { path in
-                
-                let width = min(geometry.size.width, geometry.size.height)
-                let height = width * 0.75
-                let spacing = width * 0.028
-                let middle = width / 2
-                let topWidth = 0.226 * width
-                let topHeight = 0.488 * height
-                
-                path.addLines([
-                    CGPoint(x: middle,y: spacing),
-                    CGPoint(x: middle - topWidth, y: topHeight - spacing),
-                    CGPoint(x: middle, y: topWidth / 2 + spacing),
-                    CGPoint(x: middle + topWidth, y: topHeight - spacing),
-                    CGPoint(x: middle, y: spacing)
-                ])
-                
-                path.move(to: CGPoint(x: middle, y: topHeight / 2 + spacing * 3))
-                path.addLines([
-                    CGPoint(x: middle - topWidth, y: topHeight + spacing),
-                    CGPoint(x: spacing, y: height - spacing),
-                    CGPoint(x: width - spacing, y: height - spacing),
-                    CGPoint(x: middle + topWidth, y: topHeight + spacing),
-                    CGPoint(x: middle, y: topHeight / 2 + spacing * 3)
-                ])
-                
-            }.fill(Self.symbolColor)
-            
-        }
-    }
+
+struct Coin: Identifiable {
+    let id, name, price, icon: String
+    let lineCoordinates: [CGFloat]
 }
 
 struct ContentView: View {
     
     var rates : [Coin] = [
-        Coin(id: "BTC", name: "Bitcoin", price: "9733.95", icon: "bitcoin"),
-        Coin(id: "LTC", name: "Litecoin", price: "78.70", icon: "litecoin"),
-        Coin(id: "XRP", name: "Ripple", price: "0.30", icon: "ripple"),
-        Coin(id: "TRX", name: "Tron", price: "0.02", icon: "tron"),
-        Coin(id: "ETH", name: "Ethereum", price: "78.70", icon: "ethereum")
+        Coin(id: "BTC", name: "Bitcoin", price: "9733.95", icon: "bitcoin", lineCoordinates: [2000,8000,4000,9000,5000,6000,3000]),
+        Coin(id: "LTC", name: "Litecoin", price: "78.70", icon: "litecoin", lineCoordinates: [20,10,40,70,50,60,30]),
+        Coin(id: "XRP", name: "Ripple", price: "0.30", icon: "ripple", lineCoordinates: [2.0,1.0,4.0,7.0,5.0,6.0,3.0]),
+        Coin(id: "TRX", name: "Tron", price: "0.02", icon: "tron", lineCoordinates: [0.12,0.41,0.74,0.37,0.15,0.96,0.23]),
+        Coin(id: "ETH", name: "Ethereum", price: "78.70", icon: "ethereum", lineCoordinates: [20.00,10.00,40.00,70.00,50.00,60.00,30.0])
     ]
     
     var myWallet: [Coin] = [
-    Coin(id: "BTC", name: "Bitcoin", price: "1000.0", icon: "bitcoin"),
-    Coin(id: "LTC", name: "Litecoin", price: "2000.0", icon: "litecoin"),
-    Coin(id: "TRX", name: "Tron", price: "133.7", icon: "tron"),
+    Coin(id: "BTC", name: "Bitcoin", price: "1000.0", icon: "bitcoin", lineCoordinates: [2000,1000,4000,7000,5000,6000,3000]),
+    Coin(id: "LTC", name: "Litecoin", price: "2000.0", icon: "litecoin", lineCoordinates: [20,10,40,70,50,60,30]),
+    Coin(id: "TRX", name: "Tron", price: "133.7", icon: "tron",
+        lineCoordinates: [0.02,0.01,0.04,0.07,0.05,0.06,0.03]),
     ]
     
     @State var is360 = false
@@ -65,18 +43,8 @@ struct ContentView: View {
         NavigationView {
             
             VStack {
-                
-                Button(action: {
-                    self.is360.toggle()
-                }) {
-                    
-                    BadgeSymbol()
-                        .frame(width: 150, height: 150)
-                        .rotation3DEffect(.degrees(is360 ? 360 : 0), axis: (x: 0, y: 1, z: 1))
-                        .animation(.easeIn)
-                }
 
-                LineChartController()
+                LineChartController(lineCoordinates: [3,2,6], inline: true)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 150)
                     .padding()
                 
@@ -104,7 +72,7 @@ struct ContentView: View {
                     Section(header: Text("Current Prices")) {
                         ForEach(rates) { coin in
                             
-                            NavigationLink(destination: Text("hello")) {
+                            NavigationLink(destination: GraphCoin(title: coin.name, lineCoordinates: coin.lineCoordinates)) {
 
                                 HStack {
                                     Image(coin.icon)
