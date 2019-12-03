@@ -41,3 +41,12 @@ After you see the output from ngrok in above step,
  (username = admin, password = admin )
 
 4. Click login button, you can see the crypto wallet
+
+
+## Preview
+
+<img src="./Screen_Shot_1.png" width="300" height="650">
+
+<img src="./Screen_Shot_2.png" width="300" height="650">
+
+<img src="./Screen_Shot_3.png" width="300" height="650">
