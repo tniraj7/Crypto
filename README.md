@@ -1,6 +1,6 @@
 # Crypto
 
-## How to run sever for log-in purpose
+## How to run server for log-in purpose
 
 ```bash
 > cd Crypto/
