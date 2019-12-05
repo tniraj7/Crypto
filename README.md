@@ -1,4 +1,6 @@
 # Crypto
+### A crypto wallet iOS app
+
 
 ## How to run server for log-in purpose
 
