@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct GraphCoin: View {
     
     let title: String
@@ -35,8 +34,6 @@ struct ContentView: View {
     Coin(id: "TRX", name: "Tron", price: "133.7", icon: "tron",
         lineCoordinates: [0.02,0.01,0.04,0.07,0.05,0.06,0.03]),
     ]
-    
-    @State var is360 = false
     
     var body: some View {
         
